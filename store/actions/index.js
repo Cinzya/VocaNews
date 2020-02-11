@@ -1,0 +1,1 @@
+export const RSS_FETCH = 'RSS_FETCH'

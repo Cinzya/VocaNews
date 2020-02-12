@@ -2,9 +2,11 @@ const INITIAL_STATE = {
 
 }
 
-export default UserReducer => (state = INITIAL_STATE, actions) => {
+function UserReducer (state = INITIAL_STATE, actions) {
     switch (action.type) {
         default:
             return state
     }
 }
+
+export default UserReducer;

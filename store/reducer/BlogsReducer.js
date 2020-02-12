@@ -36,12 +36,6 @@ function BlogsReducer(state = initialState, action) {
                 RSSItems: []
             };
 
-        case CLEAR:
-            return {
-                ...state,
-                test: action.payload
-            }
-
         default:
             return state
     }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { RSSfetch } from '../store/actions/fetchAction';
-import { clearState } from '../store/actions/test';
 
 class HomeScreen extends Component {
     constructor() {
@@ -15,7 +14,6 @@ class HomeScreen extends Component {
         for (let count = 0; count < UrlList.length; count++) {
             this.props.RSSfetch(UrlList[count], count)
         }
-
     }
     
     render(){
@@ -49,8 +47,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-    RSSfetch,
-    clearState
+    RSSfetch
 }
 
 export default connect(

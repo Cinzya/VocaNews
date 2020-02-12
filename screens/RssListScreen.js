@@ -1,41 +1,59 @@
-import React, { Components } from 'react';
+import React, { Component } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { RSSfetch } from '../store/actions/fetchAction';
+import { clearState } from '../store/actions/test';
 
-class RssListScreen extends React {
+class HomeScreen extends Component {
     constructor() {
         super();
-        state = {
-            rssURLs: [
-                {
-                    PiaproBlog: 'blog.piapro.net/feed'
-                },
-                {
-                    VNN: 'https://www.vocaloidnews.net/feed/'
-                },
-                {
-                    paraisovocaloid: 'https://paraisovocaloid.wordpress.com/feed/'
-                }
-            ]
-            rssList: []
+    }
+
+    componentDidMount() {
+        const UrlList = this.props.UrlList;
+
+        for (let count = 0; count < UrlList.length; count++) {
+            this.props.RSSfetch(UrlList[count], count)
         }
-    }
 
-    componentDidMount(url) {
-        RSScall.map(
-            fetch("https://api.rss2json.com/v1/api.json?rss_url=" + url {
-                method: 'GET'
-            })
-            .then(response => {
-                return response.json()
-            })
-            .then(responseData => {
-                this.setState(state => {
-                    return {rssList: state.rssList.concat(responseData)}
-                })
-            })
-            
-        )
     }
-
+    
+    render(){
+    return (
+        <View style={styles.header}>
+            <Text style={styles.headerTitle}>VocaNews</Text>
+        </View>
+    )
+}
 }
 
-export default RssListScreen;
+const styles = StyleSheet.create({
+    header: {
+        width: '100%',
+        height: 90,
+        paddingTop: 36,
+        alignItems: 'center',
+        backgroundColor: 'black'
+    },
+    headerTitle: {
+        color: 'white',
+        fontSize: 18
+    }
+})
+
+const mapStateToProps = state => ({
+    UrlList: state.Blogs.UrlList,
+    RSSItems: state.Blogs.RSSItems,
+    error: state.Blogs.error,
+    test: state.Blogs.test
+})
+
+const mapDispatchToProps = {
+    RSSfetch,
+    clearState
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HomeScreen);

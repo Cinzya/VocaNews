@@ -1,7 +1,11 @@
-import React, { Components } from 'react';
+import React, { Component } from 'react';
 
-class EntryScreen extends React {
-
+class EntryScreen extends Component {
+    render() {
+        return (
+            <Text>Ich bin im EntryScreen</Text>
+        )
+    }
 }
 
 export default EntryScreen;

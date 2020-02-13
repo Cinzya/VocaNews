@@ -1,7 +1,11 @@
-import React, { Components } from 'react';
+import React, { Component } from 'react';
 
-class FeedScreen extends React {
-
+class FeedScreen extends Component {
+    render() {
+        return (
+            <Text>Ich bin im FeedScreen</Text>
+        )
+    }
 }
 
 export default FeedScreen;

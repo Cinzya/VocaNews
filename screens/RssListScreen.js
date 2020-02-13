@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { RSSfetch } from '../store/actions/fetchAction';
 
@@ -10,7 +10,6 @@ class HomeScreen extends Component {
 
     componentDidMount() {
         const UrlList = this.props.UrlList;
-
         for (let count = 0; count < UrlList.length; count++) {
             this.props.RSSfetch(UrlList[count], count)
         }
@@ -18,25 +17,32 @@ class HomeScreen extends Component {
     
     render(){
     return (
-        <View style={styles.header}>
-            <Text style={styles.headerTitle}>VocaNews</Text>
+        <View style={styles.container}>
+        <ScrollView>
+        {this.props.RSSItems.map(Blog => (
+            <TouchableOpacity
+            onPress={() => {
+                this.props.navigation.navigate('Feed')
+            }}
+            key={Blog.data.feed.title}>
+            <View style={styles.card}>
+                <Text style={styles.title}>{Blog.data.feed.title}</Text>
+                <Text>{Blog.data.feed.description}</Text>
+            </View>
+            </TouchableOpacity>
+        ))}
+        </ScrollView>
         </View>
     )
 }
 }
 
 const styles = StyleSheet.create({
-    header: {
-        width: '100%',
-        height: 90,
-        paddingTop: 36,
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
         alignItems: 'center',
-        backgroundColor: 'black'
-    },
-    headerTitle: {
-        color: 'white',
-        fontSize: 18
-    }
+      },
 })
 
 const mapStateToProps = state => ({

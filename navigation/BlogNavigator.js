@@ -21,7 +21,7 @@ function BlogNavigator() {
       <Stack.Screen
         name="Feed"
         component={FeedScreen}
-        options={{ title: 'Articles' }}
+        options={({ route }) => ({ title: route.params.name })}
       />
         <Stack.Screen
         name="Entry"

@@ -5,7 +5,7 @@ const RssList = (props) => (
     <View style={styles.container}>
         {props.data.map(Blog => (
             <TouchableOpacity
-            onPress={() => {this.props.navigation.navigate('Feed')}}
+            onPress={() => {props.navigation.navigate('Feed')}}
             key={Blog.data.feed.title}>
             <View style={styles.card}>
                 <Text style={styles.title}>{Blog.data.feed.title}</Text>

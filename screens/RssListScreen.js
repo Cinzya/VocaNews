@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableNativeFeedback } from 'react-native';
 import { connect } from 'react-redux';
 import { RSSfetch } from '../store/actions/fetchAction';
 
 class HomeScreen extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
     componentDidMount() {
@@ -18,20 +18,29 @@ class HomeScreen extends Component {
     render(){
     return (
         <View style={styles.container}>
+
         <ScrollView>
         {this.props.RSSItems.map(Blog => (
-            <TouchableOpacity
-            onPress={() => {
-                this.props.navigation.navigate('Feed')
-            }}
-            key={Blog.data.feed.title}>
+            <TouchableNativeFeedback
+                onPress={() => {
+                    this.props.navigation.navigate(
+                        'Feed', {FeedData: Blog.data, name: Blog.data.feed.title})
+                    }}
+                key={this.props.RSSItems.indexOf(Blog)}>
+
             <View style={styles.card}>
-                <Text style={styles.title}>{Blog.data.feed.title}</Text>
-                <Text>{Blog.data.feed.description}</Text>
+                <Text style={styles.title}>
+                    {Blog.data.feed.title}
+                    </Text>
+                <Text>
+                    {Blog.data.feed.description}
+                </Text>
             </View>
-            </TouchableOpacity>
+
+            </TouchableNativeFeedback>
         ))}
         </ScrollView>
+
         </View>
     )
 }
@@ -43,6 +52,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
       },
+      card: {
+        padding: '3%',
+        marginTop: '5%',
+        backgroundColor: 'yellow'
+    },
+    title: {
+        fontSize: 17,
+        fontWeight: 'bold'
+    }
 })
 
 const mapStateToProps = state => ({

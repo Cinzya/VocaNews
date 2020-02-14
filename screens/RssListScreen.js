@@ -2,22 +2,21 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableNativeFeedback } from 'react-native';
 import { connect } from 'react-redux';
 import { RSSfetch } from '../store/actions/fetchAction';
+import Loading from '../components/ActivityIndicator';
 
 class HomeScreen extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         const UrlList = this.props.UrlList;
         for (let count = 0; count < UrlList.length; count++) {
             this.props.RSSfetch(UrlList[count], count)
         }
     }
-    
+
     render(){
     return (
         <View style={styles.container}>
+
+        <Loading style={styles.laoding}/>
 
         <ScrollView>
         {this.props.RSSItems.map(Blog => (
@@ -39,8 +38,8 @@ class HomeScreen extends Component {
 
             </TouchableNativeFeedback>
         ))}
+      
         </ScrollView>
-
         </View>
     )
 }
@@ -49,17 +48,23 @@ class HomeScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        // backgroundColor: '#fff',
         alignItems: 'center',
       },
       card: {
         padding: '3%',
-        marginTop: '5%',
-        backgroundColor: 'yellow'
+        // marginBottom: '5%',
+        backgroundColor: '#fff',
+        borderBottomWidth: 2,
+        borderBottomColor: 'lightgrey',
     },
     title: {
         fontSize: 17,
         fontWeight: 'bold'
+    },
+    loading: {
+        position: 'absolute',
+        alignSelf: 'center'
     }
 })
 
@@ -67,7 +72,7 @@ const mapStateToProps = state => ({
     UrlList: state.Blogs.UrlList,
     RSSItems: state.Blogs.RSSItems,
     error: state.Blogs.error,
-    test: state.Blogs.test
+    loading: state.Blogs.loading
 })
 
 const mapDispatchToProps = {

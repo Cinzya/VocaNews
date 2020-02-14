@@ -1,34 +1,47 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
 import { ScrollView, TouchableNativeFeedback } from 'react-native-gesture-handler';
-import HTMLView from 'react-native-htmlview';
 
 const FeedScreen = (props) => {
+
+    function Cut(title) {
+        if (title.length > 23) {
+            const cut = title.slice(0,22)
+            return cut + '...'
+        }
+        else {
+            return title
+        }
+    }
 
     const { FeedData } = props.route.params;
    
     return (
-        <View>
+        <View style={styles.container}>
         <ScrollView>
             {FeedData.items.map(article => (
-                <TouchableNativeFeedback key={FeedData.items.indexOf(article)}>
-                    <Text>
+                <TouchableNativeFeedback
+                    onPress={() => {
+                        props.navigation.navigate(
+                            'Entry', {EntryData: article, name: Cut(article.title)}
+                        )}}
+                    key={FeedData.items.indexOf(article)}
+                    style={styles.card}
+                >
+
+                    <Image
+                        style={styles.image}
+                        source={{uri: article.thumbnail}}
+                    />
+
+                    <Text style={styles.title}>
                         {article.title}
                     </Text>
 
-                    <View style={styles.metadata}>
-                        <Text>
-                            {article.pubDate}
-                        </Text>
-                        <Text>
-                            Author: {article.author}
-                        </Text>
-                    </View>
+                    <Text style={styles.metadata}>
+                        {article.pubDate}
+                    </Text>
 
-                    <HTMLView
-                        value={article.description}
-                        stylesheet={styles.description}
-                    />
                     
                 </TouchableNativeFeedback>
             ))}
@@ -37,12 +50,41 @@ const FeedScreen = (props) => {
     )
 }
 
-const styles = StyleSheet.create ({
-    description: {
+const styles = StyleSheet.create({
+    container: {
 
     },
+    card: {
+        padding: '3%',
+        marginHorizontal: '5%',
+        marginTop: '8%',
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.27,
+        shadowRadius: 4.65,
+
+        elevation: 6,
+    },
+    image: {
+        width: '100%',
+        height: 180,
+    },
+    title: {
+        fontSize: 16,
+        fontWeight: "bold",
+        marginTop: '1%'
+    },
     metadata: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginBottom: '3%'
+    },
+    author: {
+        marginLeft: '3%'
     }
 })
 

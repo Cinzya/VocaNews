@@ -3,13 +3,12 @@ import { FETCH_RSS_BEGIN, FETCH_RSS_SUCCESS, FETCH_RSS_FAILURE, CLEAR } from "..
 const initialState = {
     UrlList: [
         'https://www.vocaloidnews.net/feed/',
-        'http://www.mikumiku2ch.jp/index.rdf',
         'https://paraisovocaloid.wordpress.com/feed/',
+        'https://blog.piapro.net/feed',
     ],
     RSSItems: [],
     loading: false,
-    error: null,
-    test: 'test'
+    error: null
 }
     
 function BlogsReducer(state = initialState, action) {

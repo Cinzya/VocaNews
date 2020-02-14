@@ -26,7 +26,7 @@ function BlogNavigator() {
         <Stack.Screen
         name="Entry"
         component={EntryScreen}
-        options={{ title: 'Article' }}
+        options={({ route }) => ({ title: route.params.name })}
       />
     </Stack.Navigator>
     </NavigationContainer>

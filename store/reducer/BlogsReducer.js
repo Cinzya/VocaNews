@@ -1,4 +1,5 @@
-import { FETCH_RSS_BEGIN, FETCH_RSS_SUCCESS, FETCH_RSS_FAILURE } from "../actions";
+import { FETCH_RSS_BEGIN, FETCH_RSS_SUCCESS, FETCH_RSS_FAILURE, DELETE_EVENT } from "../actions";
+import { onFrameDidUpdate } from "expo/build/AR";
 
 const initialState = {
     UrlList: [
@@ -34,6 +35,12 @@ function BlogsReducer(state = initialState, action) {
                 error: action.payload.error,
                 RSSItems: []
             };
+
+        case DELETE_EVENT:
+            return {
+                ...state,
+                RSSItems: [state.RSSItems.items.filter(item => state.RSSItems.items.indexOf(item) !== state.RSSItems.items.indexOf(action.payload))]
+            }
 
         default:
             return state

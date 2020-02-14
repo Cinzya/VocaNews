@@ -1,8 +1,13 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
+import { connect } from 'react-redux';
 import { ScrollView, TouchableNativeFeedback } from 'react-native-gesture-handler';
+import LeftActions from '../components/deleteMsg';
+import { deleteItems } from '../store/actions/deleteAction';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 const FeedScreen = (props) => {
+
 
     function Cut(title) {
         if (title.length > 23) {
@@ -20,6 +25,10 @@ const FeedScreen = (props) => {
         <View style={styles.container}>
         <ScrollView>
             {FeedData.items.map(article => (
+                <Swipeable
+                    renderLeftActions={LeftActions}
+                    onSwipeableLeftOpen={props.deleteItems(article)}
+                >
                 <TouchableNativeFeedback
                     onPress={() => {
                         props.navigation.navigate(
@@ -44,6 +53,7 @@ const FeedScreen = (props) => {
 
                     
                 </TouchableNativeFeedback>
+                </Swipeable>
             ))}
         </ScrollView>
         </View>
@@ -88,4 +98,15 @@ const styles = StyleSheet.create({
     }
 })
 
-export default FeedScreen;
+const mapStateToProps = (state) => ({
+
+})
+
+const mapDispatchToProps = {
+    deleteItems
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(FeedScreen);

@@ -4,7 +4,6 @@ A [React-Native](https://facebook.github.io/react-native/) news app which collec
 ---
 
 # Installation
-
 ```
 $ npm install -g expo-cli
 ```

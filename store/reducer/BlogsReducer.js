@@ -1,4 +1,4 @@
-import { FETCH_RSS_BEGIN, FETCH_RSS_SUCCESS, FETCH_RSS_FAILURE, CLEAR } from "../actions";
+import { FETCH_RSS_BEGIN, FETCH_RSS_SUCCESS, FETCH_RSS_FAILURE } from "../actions";
 
 const initialState = {
     UrlList: [

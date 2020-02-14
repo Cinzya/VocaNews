@@ -32,13 +32,13 @@ $ exp start --android [options]
 
 The app automatically collects data from multiple pre-definied blogs via their RSS feeds. An option to provide the user to add their own sources is not intended yet since the app is focused around VOCALOID as a topic and should include such sources.
 
-- Home
+- **Home:**
 Shows a list of all blogs. It gives information about the name and a short discription of given blogs. Clicking on those brings you to the feed screen.
 
-- Feed
+- **Feed:**
 Shows a list of all recent blog posts of given blog including a thumbnail image, title of said post, and publishing date. Clicking on those brings you to the entry screen.
 
-- Entry
+- **Entry:**
 Shows the full content of given blog posts including links and images. Clicking on links redirects you to your browser.
 
 ## Work in progress

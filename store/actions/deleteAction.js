@@ -1,8 +1,10 @@
 import { DELETE_EVENT } from './index';
 
-export function deleteItems(item) {
+export function deleteItems(blog, item) {
     return {
         type: DELETE_EVENT,
-        payload: item
+        item:  item,
+        blog: blog
+        
     }
 }

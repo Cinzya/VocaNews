@@ -23,7 +23,7 @@ class HomeScreen extends Component {
             <TouchableNativeFeedback
                 onPress={() => {
                     this.props.navigation.navigate(
-                        'Feed', {FeedData: Blog.data, name: Blog.data.feed.title})
+                        'Feed', {FeedData: Blog, name: Blog.data.feed.title})
                     }}
                 key={this.props.RSSItems.indexOf(Blog)}>
 

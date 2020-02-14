@@ -8,6 +8,9 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 const FeedScreen = (props) => {
 
+    function test() {
+    console.log(props.RSSItems.indexOf(FeedData))
+    }
 
     function Cut(title) {
         if (title.length > 23) {
@@ -24,17 +27,17 @@ const FeedScreen = (props) => {
     return (
         <View style={styles.container}>
         <ScrollView>
-            {FeedData.items.map(article => (
+            {FeedData.data.items.map(article => (
                 <Swipeable
                     renderLeftActions={LeftActions}
-                    onSwipeableLeftOpen={props.deleteItems(article)}
+                    onSwipeableLeftOpen={props.deleteItems(props.RSSItems.indexOf(FeedData), article)}
                 >
                 <TouchableNativeFeedback
                     onPress={() => {
                         props.navigation.navigate(
                             'Entry', {EntryData: article, name: Cut(article.title)}
                         )}}
-                    key={FeedData.items.indexOf(article)}
+                    key={FeedData.data.items.indexOf(article)}
                     style={styles.card}
                 >
 
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-
+    RSSItems: state.Blogs.RSSItems,
 })
 
 const mapDispatchToProps = {
